@@ -1,0 +1,53 @@
+name: SIGILITAS piBI PACADEX
+
+on:
+  push:
+    branches: [main]
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sigilitas-pacadex-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  inspect-and-expose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout accepted project state
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+
+      - name: Validate PACADEX engine
+        run: python -m unittest -v tests.test_pacadex
+
+      - name: Generate source-bound PACADEX and MCP resources
+        run: |
+          python sigilitas/pacadex.py \
+            --event-path "$GITHUB_EVENT_PATH" \
+            --event-name "$GITHUB_EVENT_NAME" \
+            --ref "$GITHUB_REF" \
+            --sha "$GITHUB_SHA" \
+            --repository "$GITHUB_REPOSITORY" \
+            --output pacadex-out
+
+      - name: Upload immutable run artifact
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        with:
+          name: pacadex-${{ github.sha }}
+          path: pacadex-out/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Publish receipt to job summary
+        run: |
+          echo '## SIGILITAS PACADEX receipt' >> "$GITHUB_STEP_SUMMARY"
+          echo '```json' >> "$GITHUB_STEP_SUMMARY"
+          cat pacadex-out/receipt.json >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
