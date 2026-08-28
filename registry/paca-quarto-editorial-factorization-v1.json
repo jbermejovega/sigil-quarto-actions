@@ -1,0 +1,25 @@
+{
+  "schema_id": "PACA_QUARTO_EDITORIAL_FACTORIZATION_V1",
+  "mode": "STATIK_EDITORIAL",
+  "api": "sigil://paca-quarto/editorial-factorization/v1",
+  "posix_effect_plan": [
+    "OPENAT_READ",
+    "FSTATAT",
+    "READDIR",
+    "WRITEAT_ARTIFACT",
+    "RENAMEAT_ATOMIC"
+  ],
+  "forbidden_effects": ["EXEC", "NETWORK", "PUBLISH", "GIT_WRITE", "SHELL"],
+  "orders": ["INCIDENCE_PARTIAL_ORDER", "CAUSAL_DAG", "COCHAIN_DEGREE"],
+  "orders_identified": false,
+  "quantum_reindexing_ports": ["ZX_CALCULUS", "QUIPPER", "OPENQASM_3"],
+  "universal_abstract_flavors": ["PLURAL_TYPED", "QUNO_TYPED", "SACRED_TYPED", "TROPE_TYPED"],
+  "trope_type": {
+    "persistent": true,
+    "source_class": "SIGIL_FICTION",
+    "asserted_as_fact": false,
+    "asserted_as_theorem": false
+  },
+  "runtime_authority": false,
+  "safe_replay": true
+}

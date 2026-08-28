@@ -1,0 +1,13 @@
+{
+  "schema_id": "PACA_QUARTO_EDITORIAL_FACTORIZATION_V1_LOCAL_VALIDATION",
+  "checks": {
+    "python_compile": "PASS",
+    "python_unittest": {"passed": 9, "total": 9},
+    "paca_task_validator": "PASS",
+    "registry_json": "PASS"
+  },
+  "canonical_verdict": "ADMIT",
+  "hosted_workflow": "NOT_OBSERVED_FOR_THIS_HEAD",
+  "runtime_certification": false,
+  "formal_certification": false
+}

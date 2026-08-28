@@ -5,6 +5,8 @@ from hashlib import sha256
 import json
 from typing import Any
 
+from sigilitas.editorial_factorization import canonical_editorial_codicex
+
 
 def digest(value: Any) -> str:
     return sha256(json.dumps(value, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
@@ -18,8 +20,10 @@ def canonical_mcp_exposure(
     federation: dict[str, Any],
 ) -> dict[str, Any]:
     registered = sorted({agent["actor"] for agent in agents})
+    _editorial_codicex, editorial_receipt = canonical_editorial_codicex(repository, head_sha)
     resources = [
         {"uri": "sigil://mcp/paca-quarto/project", "type": "PACAQuartoProjectionType", "source_bound": True},
+        {"uri": "sigil://mcp/paca-quarto/editorial-factorization", "type": "PACAQuartoEditorialFactorizationType", "digest": editorial_receipt["receipt_digest"], "verdict": editorial_receipt["verdict"]},
         {"uri": "sigil://mcp/paca-pandoc/ast", "type": "PACAPandocASTProjectionType", "source_bound": True},
         {"uri": "sigil://mcp/sigilbook/live", "type": "LiveSigilbookType", "source_bound": True},
         {"uri": "sigil://mcp/hyperjarra/jauria", "type": "HyperJarraJauriaType", "source_bound": True},
@@ -44,6 +48,7 @@ def canonical_mcp_exposure(
         "registered_agents": registered,
         "resources": resources,
         "operations": ["DESCRIBE", "READ", "VALIDATE", "PLAN"],
+        "editorial_factorization": editorial_receipt,
         "presentation": {
             "paca_quarto": "PACAQuartoProjectionType",
             "paca_pandoc": "PACAPandocASTProjectionType",
@@ -73,7 +78,7 @@ def canonical_mcp_exposure(
             "repository_mutated": False,
             "runtime_authority": False,
         },
-        "verdict": "ADMIT" if registered and pr_tree["verdict"] == "ADMIT" and federation["verdict"] == "ADMIT" else "HOLD",
+        "verdict": "ADMIT" if registered and pr_tree["verdict"] == "ADMIT" and federation["verdict"] == "ADMIT" and editorial_receipt["verdict"] == "ADMIT" else "HOLD",
     }
     body["exposure_digest"] = digest(body)
     return body

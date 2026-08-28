@@ -142,6 +142,7 @@ def build(root: Path, event_name: str, ref: str, sha: str, repository: str, payl
         {"uri": "sigil://pacadex/project/tree", "type": "WholePRTreeType"},
         {"uri": "sigil://pacadex/federation/session", "type": "VirtualRepoSessionType"},
         {"uri": "sigil://pacadex/federation/statik-memory", "type": "EmbodiedSTATIKMemoryType"},
+        {"uri": "sigil://pacadex/paca-quarto/editorial-factorization", "type": "PACAQuartoEditorialFactorizationType"},
     ]
     resources.extend(
         {"uri": f"sigil://pacadex/kokompi/{node['actor'].lower()}", "type": "KokompiVirtualSession", "session_id": node["id"]}
@@ -202,6 +203,7 @@ def main() -> int:
         "typed_tree_file_count": len(snapshot["pr_tree"]["files"]),
         "federation_receipt_digest": snapshot["repository_federation"]["receipt_digest"],
         "external_mcp_exposure_digest": snapshot["external_mcp"]["exposure_digest"],
+        "editorial_factorization_receipt_digest": snapshot["external_mcp"]["editorial_factorization"]["receipt_digest"],
         "panic_count": len(snapshot["livecoded_worktree"]["panics"]),
         "commit_sha": args.sha,
         "safe_replay": True,

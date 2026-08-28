@@ -1,0 +1,13 @@
+{
+  "receipt_sha256": "a7dcc43879d0977d43da3bdac5b4653c6986e33a500dc2473c400be87355cf72",
+  "schema_id": "PACA_TASK_LOCALIZED_LOOP_V1",
+  "task_id": "paca-quarto-editorial-factorization-v1",
+  "verdict": "ADMIT_REVIEW_CANDIDATE",
+  "truth_boundary": {
+    "extra_physical_axes_claimed": false,
+    "git_mutated": false,
+    "physical_action_executed": false,
+    "runtime_started": false,
+    "workflow_dispatched": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schema_id": "PACA_TASK_LOCALIZED_LOOP_V1",
+  "task_id": "paca-quarto-editorial-factorization-v1",
+  "actor": "KOKOMPI_PACA_QUARTO_EDITORIAL_FACTORIZER",
+  "move": "LOOP_OF_LOOP",
+  "source_context": "sigil://mcp/external/koko-sdk/paca-quarto-pandoc/v1",
+  "target_context": "sigil://paca-quarto/editorial-factorization/v1",
+  "loop_id": "paca-quarto-editorial-factorization-loop-5",
+  "parent_loop_id": "sigilitas-paca-quarto-pandoc-external-mcp-loop-4",
+  "depth": 5,
+  "max_depth": 5,
+  "ambient_profile": "ABSTRACT_HIGHER_TYPE",
+  "transversal": "external_mcp_to_statik_editorial_codicex",
+  "orthogonal_direction_count": 1,
+  "directional_budget": 4,
+  "higher_type_model": true,
+  "resource_type": "PACA_QUARTO_EDITORIAL_FACTORIZATION_RESOURCE",
+  "omega_witness": "omega:paca-quarto:editorial-factorization:v1",
+  "pi_fixed": true,
+  "safe_replay": true,
+  "runtime_authority": false
+}
