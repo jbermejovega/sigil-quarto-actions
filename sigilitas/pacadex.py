@@ -37,6 +37,8 @@ def inspect_workflows(root: Path) -> list[dict[str, str]]:
         text = path.read_text(encoding="utf-8")
         if "permissions:" not in text:
             findings.append({"file": str(path.relative_to(root)), "code": "PERMISSIONS_UNDECLARED"})
+        if re.search(r"^\s*contents:\s*write\s*$", text, re.MULTILINE):
+            findings.append({"file": str(path.relative_to(root)), "code": "CONTENTS_WRITE_REQUIRES_EFFECT_GATE"})
         if "pull_request_target:" in text:
             findings.append({"file": str(path.relative_to(root)), "code": "PR_TARGET_REQUIRES_TRUST_REVIEW"})
         for line in text.splitlines():
@@ -113,6 +115,10 @@ def build(root: Path, event_name: str, ref: str, sha: str, repository: str, payl
         {"uri": "sigil://pacadex/policies/global", "type": "GlobalPolicyType"},
         {"uri": "sigil://pacadex/kokompis", "type": "PluralKokompiSessionTree"},
     ]
+    resources.extend(
+        {"uri": f"sigil://pacadex/kokompi/{node['actor'].lower()}", "type": "KokompiVirtualSession", "session_id": node["id"]}
+        for node in nodes
+    )
     body = {
         "schema_id": SCHEMA_ID,
         "verdict": "ADMIT" if admitted else "HOLD",

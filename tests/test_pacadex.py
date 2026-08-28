@@ -29,6 +29,8 @@ class PacadexTests(unittest.TestCase):
             self.assertFalse(snap["invariants"]["repository_mutated"])
             self.assertTrue(snap["rag_inspection"]["source_bound"])
             self.assertEqual(snap["rag_inspection"]["findings"][0]["code"], "ACTION_NOT_PINNED_FULL_SHA")
+            kokompi_resources = [x for x in snap["mcp"]["resources"] if "/kokompi/" in x["uri"]]
+            self.assertEqual(len(kokompi_resources), len(snap["session_tree"]["nodes"]))
 
 
 if __name__ == "__main__":

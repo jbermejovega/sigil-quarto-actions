@@ -33,4 +33,4 @@ Action publishers use semantic release tags and may maintain a major compatibili
 
 The additive bunch `&` shares event and global-policy context. The multiplicative bunch `*` separates PACADEX construction from MCP projection so their capabilities do not alias. Every KOKOMPI remains identity-distinct and receives one bounded effect.
 
-MCP exposure is descriptive: resources are generated, but no server, workflow dispatch, merge, release or tag move is granted by this carrier.
+MCP exposure is descriptive: the collective tree and every identity-distinct KOKOMPI session receive their own resource URI, but no server, workflow dispatch, merge, release or tag move is granted by this carrier.
