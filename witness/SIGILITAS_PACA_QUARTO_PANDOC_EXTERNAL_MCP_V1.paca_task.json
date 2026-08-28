@@ -1,0 +1,22 @@
+{
+  "schema_id": "PACA_TASK_LOCALIZED_LOOP_V1",
+  "task_id": "sigilitas-paca-quarto-pandoc-external-mcp-v1",
+  "actor": "KOKOMPI_EXTERNAL_MCP_EXPOSITION_KEEPER",
+  "move": "LOOP_OF_LOOP",
+  "source_context": "sigil://pacadex/sigil-quarto-actions/federation/v1",
+  "target_context": "sigil://mcp/external/koko-sdk/paca-quarto-pandoc/v1",
+  "loop_id": "sigilitas-paca-quarto-pandoc-external-mcp-loop-4",
+  "parent_loop_id": "sigilitas-synthgothhub-repo-federation-loop-3",
+  "depth": 4,
+  "max_depth": 4,
+  "ambient_profile": "ABSTRACT_HIGHER_TYPE",
+  "transversal": "federation_to_external_mcp_exposition",
+  "orthogonal_direction_count": 1,
+  "directional_budget": 4,
+  "higher_type_model": true,
+  "resource_type": "PACA_QUARTO_PANDOC_EXTERNAL_MCP_RESOURCE",
+  "omega_witness": "omega:sigilitas:paca-quarto-pandoc:external-mcp:v1",
+  "pi_fixed": true,
+  "safe_replay": true,
+  "runtime_authority": false
+}

@@ -1,0 +1,7 @@
+{
+  "receipt_sha256": "6ac5d1530a352ba5bfe581bdac739a5b0219ddfa80198d1be0a74e858eb7f9e6",
+  "schema_id": "PACA_TASK_LOCALIZED_LOOP_V1",
+  "task_id": "sigilitas-paca-quarto-pandoc-external-mcp-v1",
+  "verdict": "ADMIT_REVIEW_CANDIDATE",
+  "truth_boundary": {"git_mutated_by_task": false, "runtime_started": false, "workflow_dispatched": false}
+}

@@ -1,0 +1,7 @@
+{
+  "receipt_sha256": "372d0fbb81b92e1e38088845871fe0b3db7e640512541f51ddd5fca05decfd22",
+  "schema_id": "PACA_TASK_LOCALIZED_LOOP_V1",
+  "task_id": "sigilitas-synthgothhub-repo-federation-v1",
+  "verdict": "ADMIT_REVIEW_CANDIDATE",
+  "truth_boundary": {"git_mutated_by_task": false, "runtime_started": false, "workflow_dispatched": false}
+}

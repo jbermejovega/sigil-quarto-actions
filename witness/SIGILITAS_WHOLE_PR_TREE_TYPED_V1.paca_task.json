@@ -1,0 +1,22 @@
+{
+  "schema_id": "PACA_TASK_LOCALIZED_LOOP_V1",
+  "task_id": "sigilitas-whole-pr-tree-typed-v1",
+  "actor": "KOKOMPI_PR_TREE_TYPE_KEEPER",
+  "move": "LOOP_OF_LOOP",
+  "source_context": "sigil://pacadex/sigil-quarto-actions/livecoded-worktree/v1",
+  "target_context": "sigil://pacadex/sigil-quarto-actions/whole-pr-tree/v1",
+  "loop_id": "sigilitas-whole-pr-tree-typed-loop-2",
+  "parent_loop_id": "sigilitas-livecoded-worktree-pibi-panics-loop-1",
+  "depth": 2,
+  "max_depth": 2,
+  "ambient_profile": "ABSTRACT_HIGHER_TYPE",
+  "transversal": "project_worktree_tree_node",
+  "orthogonal_direction_count": 1,
+  "directional_budget": 4,
+  "higher_type_model": true,
+  "resource_type": "WHOLE_PR_TREE_TYPED_RESOURCE",
+  "omega_witness": "omega:sigilitas:whole-pr-tree:typed:v1",
+  "pi_fixed": true,
+  "safe_replay": true,
+  "runtime_authority": false
+}

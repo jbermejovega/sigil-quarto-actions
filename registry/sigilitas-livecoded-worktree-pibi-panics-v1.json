@@ -1,0 +1,21 @@
+{
+  "schema_id": "SIGILITAS_LIVECODED_WORKTREE_PIBI_V1",
+  "parent": "SIGILITAS_PIBI_PACADEX_V1",
+  "phase_order": ["INKED", "LINKED", "KINKED", "TWINKED"],
+  "logic": "piBI",
+  "additive": "shared provenance and project context",
+  "multiplicative": "resource-separated transition and twin projection",
+  "panic_policy": {
+    "HOLD": ["EVENT_NOT_ADMITTED", "HEAD_WITNESS_MISSING", "PARENT_CHECKPOINT_MISSING"],
+    "REJECT": ["PROVENANCE_HEAD_DRIFT", "IDENTITY_COLLAPSE", "CAUSAL_CYCLE", "CAPABILITY_AMPLIFICATION"]
+  },
+  "truth_boundary": {
+    "kink_is_physical": false,
+    "curvature_inferred": false,
+    "twins_are_literal_bearer_equality": false,
+    "panic_throws_ambient_exception": false,
+    "checkpoint_preserved": true,
+    "repository_mutated": false,
+    "runtime_authority": false
+  }
+}

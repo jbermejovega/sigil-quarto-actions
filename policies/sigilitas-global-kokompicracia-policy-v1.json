@@ -1,0 +1,28 @@
+{
+  "schema_id": "SIGILITAS_GLOBAL_KOKOMPICRACIA_POLICY_V1",
+  "precedence": "GLOBAL_PROJECT_POLICY_BEFORE_ROLE_POLICY",
+  "accepted_events": [
+    "push:refs/heads/main",
+    "release:published"
+  ],
+  "effects": ["DESCRIBE", "READ", "VALIDATE", "PLAN"],
+  "forbidden_ambient_effects": ["MUTATE", "DISPATCH", "MERGE", "TAG_MOVE"],
+  "release_management": {
+    "publisher": "semantic version release tags plus explicit major compatibility alias",
+    "consumer": "full commit SHA preferred",
+    "immutable_release": "release-specific tags only",
+    "default_branch_reference": false
+  },
+  "rag": {
+    "source_bound": true,
+    "learn_from": "ADMITTED_RECEIPTS_ONLY",
+    "hidden_learning": false,
+    "hidden_sync": false
+  },
+  "mcp": {
+    "self_expose": "RESOURCES_ONLY",
+    "runtime_authority": false
+  },
+  "pi_fixed": true,
+  "safe_replay": true
+}

@@ -1,0 +1,10 @@
+{
+  "python_compile": "PASS",
+  "unittest": "4/4 PASS",
+  "yaml_parse": "PASS",
+  "sample_event": "push:refs/heads/main",
+  "sample_verdict": "ADMIT",
+  "sample_snapshot_digest": "e56488d5f8f393612f117063a4868c1ea67194e3177416ae05e47c24e1c0c72d",
+  "hosted_workflow_executed": false,
+  "runtime_certified": false
+}

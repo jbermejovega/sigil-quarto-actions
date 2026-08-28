@@ -1,0 +1,12 @@
+{
+  "checks": {
+    "paca_federation_task_validator": "PASS",
+    "paca_tree_task_validator": "PASS",
+    "python_compile": "PASS",
+    "python_unittest": {"passed": 11, "total": 11},
+    "registry_json": "PASS"
+  },
+  "hosted_workflow": "NOT_OBSERVED_FOR_THIS_SOURCE_TREE",
+  "runtime_certification": false,
+  "schema_id": "SIGILITAS_WHOLE_PR_TREE_FEDERATION_LOCAL_VALIDATION_V1"
+}

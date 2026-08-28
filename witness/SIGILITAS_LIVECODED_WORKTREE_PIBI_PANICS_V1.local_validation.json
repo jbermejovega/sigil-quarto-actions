@@ -1,0 +1,14 @@
+{
+  "checks": {
+    "paca_task_validator": "PASS",
+    "python_compile": "PASS",
+    "python_unittest": {
+      "passed": 7,
+      "total": 7
+    },
+    "registry_json": "PASS"
+  },
+  "hosted_workflow": "NOT_OBSERVED_FOR_THIS_SOURCE_TREE",
+  "proof_or_runtime_certification": false,
+  "schema_id": "SIGILITAS_LIVECODED_WORKTREE_LOCAL_VALIDATION_V1"
+}

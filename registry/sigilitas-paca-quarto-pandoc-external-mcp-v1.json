@@ -1,0 +1,18 @@
+{
+  "schema_id": "SIGILITAS_PACA_QUARTO_PANDOC_EXTERNAL_MCP_V1",
+  "parent": "SIGILITAS_SYNTHGOTHHUB_REPO_FEDERATION_V1",
+  "presentations": ["PACAQuartoProjectionType", "PACAPandocASTProjectionType"],
+  "agent_model": "KokompiAgentType",
+  "sdk_model": "KokoSDKTypedKokompicracia",
+  "operations": ["DESCRIBE", "READ", "VALIDATE", "PLAN"],
+  "repository_rule": "RepositoryType[R] -> LiveSigilbookType[R]",
+  "index_type": "HyperJarraJauriaType<LiveSigilbookType[R]>",
+  "truth_boundary": {
+    "all_registered_agents_exposed": true,
+    "all_github_repositories_materialized": false,
+    "repository_identity_preserved": true,
+    "members_fused": false,
+    "server_started": false,
+    "runtime_authority": false
+  }
+}

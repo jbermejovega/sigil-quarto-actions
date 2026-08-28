@@ -1,0 +1,11 @@
+{
+  "receipt_sha256": "87f085146266db2d9c4b3315bbfac6a56431deee6e5b5c06dab0bb3ef37c987a",
+  "verdict": "ADMIT_REVIEW_CANDIDATE",
+  "truth_boundary": {
+    "runtime_started": false,
+    "workflow_dispatched": false,
+    "git_mutated": false,
+    "physical_action_executed": false,
+    "extra_physical_axes_claimed": false
+  }
+}

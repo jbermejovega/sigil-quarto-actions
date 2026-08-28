@@ -1,0 +1,22 @@
+{
+  "schema_id": "PACA_TASK_LOCALIZED_LOOP_V1",
+  "task_id": "sigilitas-pibi-pacadex-sigil-quarto-actions-v1",
+  "actor": "kokompi-pacadex-curator",
+  "move": "LOOP",
+  "source_context": "github://jbermejovega/sigil-quarto-actions/main/91dabb203fce7f899d10ef8e482d94b00f397cbc",
+  "target_context": "sigil://pacadex/sigil-quarto-actions/session-tree/v1",
+  "loop_id": "sigilitas-pibi-pacadex-loop-0",
+  "parent_loop_id": null,
+  "depth": 0,
+  "max_depth": 2,
+  "ambient_profile": "ABSTRACT_HIGHER_TYPE",
+  "transversal": "github-event:accepted-to-pacadex",
+  "orthogonal_direction_count": 1,
+  "directional_budget": 4,
+  "higher_type_model": true,
+  "resource_type": "GITHUB_PROJECT_PIBI_PACADEX_RESOURCE",
+  "omega_witness": "omega:sigilitas:pibi:pacadex:sigil-quarto-actions:v1",
+  "pi_fixed": true,
+  "safe_replay": true,
+  "runtime_authority": false
+}

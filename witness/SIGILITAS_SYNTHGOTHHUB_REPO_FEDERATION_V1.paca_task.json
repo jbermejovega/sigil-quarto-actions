@@ -1,0 +1,22 @@
+{
+  "schema_id": "PACA_TASK_LOCALIZED_LOOP_V1",
+  "task_id": "sigilitas-synthgothhub-repo-federation-v1",
+  "actor": "PYDANTIKA_REPO_FEDERATION_KEEPER",
+  "move": "LOOP_OF_LOOP",
+  "source_context": "sigil://pacadex/sigil-quarto-actions/whole-pr-tree/v1",
+  "target_context": "sigil://sigilbook/federation/synthgothhub/sigil-quarto-actions/v1",
+  "loop_id": "sigilitas-synthgothhub-repo-federation-loop-3",
+  "parent_loop_id": "sigilitas-whole-pr-tree-typed-loop-2",
+  "depth": 3,
+  "max_depth": 3,
+  "ambient_profile": "ABSTRACT_HIGHER_TYPE",
+  "transversal": "repo_session_statik_matrix_federation",
+  "orthogonal_direction_count": 1,
+  "directional_budget": 4,
+  "higher_type_model": true,
+  "resource_type": "SYNTHGOTHHUB_REPOSITORY_FEDERATION_RESOURCE",
+  "omega_witness": "omega:sigilitas:synthgothhub:repo-federation:v1",
+  "pi_fixed": true,
+  "safe_replay": true,
+  "runtime_authority": false
+}
