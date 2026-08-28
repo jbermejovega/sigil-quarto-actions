@@ -10,6 +10,8 @@ import re
 from typing import Any
 
 from sigilitas.livecoded_worktree import livecode_worktree, worktree_bearer
+from sigilitas.pr_tree import type_pr_tree
+from sigilitas.repo_federation import virtual_repo_session
 
 
 SCHEMA_ID = "SIGILITAS_PIBI_PACADEX_V1"
@@ -108,6 +110,8 @@ def build(root: Path, event_name: str, ref: str, sha: str, repository: str, payl
         event_reason=reason,
         provenance_head_sha=sha,
     )
+    pr_tree = type_pr_tree(root)
+    federation = virtual_repo_session(repository, sha, pr_tree)
     if livecoded["verdict"] == "REJECT":
         verdict = "REJECT"
         composed_reason = "LIVECODED_WORKTREE_REJECT"
@@ -133,6 +137,9 @@ def build(root: Path, event_name: str, ref: str, sha: str, repository: str, payl
         {"uri": "sigil://pacadex/kokompis", "type": "PluralKokompiSessionTree"},
         {"uri": "sigil://pacadex/worktree/livecoded", "type": "LivecodedWorkTreePiBISession"},
         {"uri": "sigil://pacadex/panics", "type": "PacaPanicTypedLedger"},
+        {"uri": "sigil://pacadex/project/tree", "type": "WholePRTreeType"},
+        {"uri": "sigil://pacadex/federation/session", "type": "VirtualRepoSessionType"},
+        {"uri": "sigil://pacadex/federation/statik-memory", "type": "EmbodiedSTATIKMemoryType"},
     ]
     resources.extend(
         {"uri": f"sigil://pacadex/kokompi/{node['actor'].lower()}", "type": "KokompiVirtualSession", "session_id": node["id"]}
@@ -145,6 +152,8 @@ def build(root: Path, event_name: str, ref: str, sha: str, repository: str, payl
         "project": project,
         "session_tree": {"logic": "piBI", "nodes": nodes, "bunches": bunches},
         "livecoded_worktree": livecoded,
+        "pr_tree": pr_tree,
+        "repository_federation": federation,
         "rag_inspection": {"source_bound": True, "hidden_learning": False, "findings": findings},
         "mcp": {"self_exposed": True, "effects": ["DESCRIBE", "READ", "VALIDATE", "PLAN"], "resources": resources},
         "release_policy": {
@@ -186,6 +195,9 @@ def main() -> int:
         "verdict": snapshot["verdict"],
         "snapshot_digest": snapshot["snapshot_digest"],
         "livecoded_receipt_digest": snapshot["livecoded_worktree"]["receipt_digest"],
+        "pr_tree_digest": snapshot["pr_tree"]["tree_digest"],
+        "typed_tree_file_count": len(snapshot["pr_tree"]["files"]),
+        "federation_receipt_digest": snapshot["repository_federation"]["receipt_digest"],
         "panic_count": len(snapshot["livecoded_worktree"]["panics"]),
         "commit_sha": args.sha,
         "safe_replay": True,

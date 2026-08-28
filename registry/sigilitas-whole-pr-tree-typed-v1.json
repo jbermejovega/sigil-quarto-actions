@@ -1,0 +1,30 @@
+{
+  "schema_id": "SIGILITAS_WHOLE_PR_TREE_TYPED_V1",
+  "parent": "SIGILITAS_LIVECODED_WORKTREE_PIBI_V1",
+  "root_type": "ProjectType",
+  "node_types": [
+    "WorkTreeDirectoryType",
+    "GitHubWorkflowType",
+    "DependencyUpdatePolicyType",
+    "GlobalPolicyType",
+    "TypeRegistryType",
+    "SigilitasRuntimeCarrierType",
+    "ExecutableTestWitnessType",
+    "PacaTaskEnvelopeType",
+    "SafeReplayReceiptType",
+    "ValidationWitnessType",
+    "DocumentationProjectionType",
+    "PrimitiveArtifactType"
+  ],
+  "relations": ["DIRECTORY_CONTAINS"],
+  "semantic_hyperdag_is_causal_dag": false,
+  "causal_projection": "DAG<FluxQuantumTyped>",
+  "bunched_logic": {"additive": "&", "multiplicative": "*"},
+  "truth_boundary": {
+    "all_files_receive_a_type": true,
+    "generic_primitive_is_explicit": true,
+    "identity_collapsed": false,
+    "repository_mutated": false,
+    "runtime_authority": false
+  }
+}

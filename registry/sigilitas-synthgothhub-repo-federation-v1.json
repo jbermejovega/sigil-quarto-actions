@@ -1,0 +1,23 @@
+{
+  "schema_id": "SIGILITAS_SYNTHGOTHHUB_REPO_FEDERATION_V1",
+  "parent": "SIGILITAS_WHOLE_PR_TREE_TYPED_V1",
+  "composition": [
+    "VirtualRepoSessionType",
+    "EmbodiedSTATIKMemoryType",
+    "RepositoryMatrixType",
+    "TypedGitHubFederationType",
+    "SigilbookRootProjectionType",
+    "SynthGothHubCloudType"
+  ],
+  "federation_root": "jbermejovega/sigilbook",
+  "member_repository": "jbermejovega/sigil-quarto-actions",
+  "capability_composition": "INTERSECTION",
+  "truth_boundary": {
+    "repository_is_session": false,
+    "session_is_statik_memory": false,
+    "statik_memory_is_github": false,
+    "physical_cloud_claimed": false,
+    "hidden_sync": false,
+    "runtime_authority": false
+  }
+}

@@ -4,6 +4,8 @@ from pathlib import Path
 
 from sigilitas.pacadex import accepted_event, build, sessions, validate_session_tree
 from sigilitas.livecoded_worktree import PanicVerdict, livecode_worktree, worktree_bearer
+from sigilitas.pr_tree import artifact_type, type_pr_tree
+from sigilitas.repo_federation import virtual_repo_session
 
 
 SHA = "a" * 40
@@ -33,6 +35,8 @@ class PacadexTests(unittest.TestCase):
             kokompi_resources = [x for x in snap["mcp"]["resources"] if "/kokompi/" in x["uri"]]
             self.assertEqual(len(kokompi_resources), len(snap["session_tree"]["nodes"]))
             self.assertEqual([x["phase"] for x in snap["livecoded_worktree"]["phases"]], ["INKED", "LINKED", "KINKED", "TWINKED"])
+            self.assertTrue(snap["pr_tree"]["invariants"]["all_files_typed"])
+            self.assertEqual(len(snap["pr_tree"]["files"]), 1)
 
     def test_missing_parent_cannot_hide_beneath_admit(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -54,6 +58,36 @@ class PacadexTests(unittest.TestCase):
         session = livecode_worktree(bearer, True, "ACCEPTED_MAIN_COMMIT", "c" * 40)
         self.assertEqual(session["verdict"], PanicVerdict.REJECT.value)
         self.assertIn("PROVENANCE_HEAD_DRIFT", {p["code"] for p in session["panics"]})
+
+    def test_whole_tree_has_distinct_typed_nodes_and_bounded_quanta(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "sigilitas").mkdir()
+            (root / "tests").mkdir()
+            (root / "sigilitas/carrier.py").write_text("VALUE = 1\n")
+            (root / "tests/test_carrier.py").write_text("assert True\n")
+            tree = type_pr_tree(root)
+            self.assertEqual({x["node_type"] for x in tree["files"]}, {"SigilitasRuntimeCarrierType", "ExecutableTestWitnessType"})
+            self.assertEqual(len({x["node_id"] for x in tree["files"]}), 2)
+            self.assertTrue(tree["causal_projection"]["acyclic"])
+            self.assertTrue(tree["causal_projection"]["single_effect"])
+            self.assertLessEqual(tree["causal_projection"]["max_fan_in"], 1)
+
+    def test_unknown_artifact_is_still_primitive_typed(self):
+        self.assertEqual(artifact_type("assets/value.bin"), "PrimitiveArtifactType")
+
+    def test_repo_session_memory_and_federation_keep_distinct_bearers(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "README.md").write_text("typed\n")
+            session = virtual_repo_session("owner/repo", SHA, type_pr_tree(root))
+            self.assertEqual(session["verdict"], "ADMIT")
+            self.assertNotEqual(
+                session["virtual_session"]["bearer_id"],
+                session["embodied_statik_memory"]["bearer_id"],
+            )
+            self.assertEqual(session["federation"]["capability_composition"], "INTERSECTION")
+            self.assertFalse(session["cloud_projection"]["physical_cloud_claimed"])
 
 
 if __name__ == "__main__":

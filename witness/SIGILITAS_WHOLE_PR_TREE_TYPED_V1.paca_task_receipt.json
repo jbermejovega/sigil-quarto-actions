@@ -1,0 +1,7 @@
+{
+  "receipt_sha256": "74605cd694c1867c172616ac172e5d77023c5af2939a2fb54fbb9109a12363d5",
+  "schema_id": "PACA_TASK_LOCALIZED_LOOP_V1",
+  "task_id": "sigilitas-whole-pr-tree-typed-v1",
+  "verdict": "ADMIT_REVIEW_CANDIDATE",
+  "truth_boundary": {"git_mutated_by_task": false, "runtime_started": false, "workflow_dispatched": false}
+}
