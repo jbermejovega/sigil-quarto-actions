@@ -9,6 +9,8 @@ from pathlib import Path
 import re
 from typing import Any
 
+from sigilitas.livecoded_worktree import livecode_worktree, worktree_bearer
+
 
 SCHEMA_ID = "SIGILITAS_PIBI_PACADEX_V1"
 SHA40 = re.compile(r"^[0-9a-f]{40}$")
@@ -100,6 +102,21 @@ def build(root: Path, event_name: str, ref: str, sha: str, repository: str, payl
     nodes, bunches = sessions()
     validate_session_tree(nodes, bunches)
     findings = inspect_workflows(root)
+    livecoded = livecode_worktree(
+        worktree_bearer(repository, ref, sha, payload),
+        event_admitted=admitted,
+        event_reason=reason,
+        provenance_head_sha=sha,
+    )
+    if livecoded["verdict"] == "REJECT":
+        verdict = "REJECT"
+        composed_reason = "LIVECODED_WORKTREE_REJECT"
+    elif not admitted or livecoded["verdict"] == "HOLD":
+        verdict = "HOLD"
+        composed_reason = reason if not admitted else "LIVECODED_WORKTREE_HOLD"
+    else:
+        verdict = "ADMIT"
+        composed_reason = reason
     project = {
         "type": "GitHubProjectType",
         "repository": repository,
@@ -114,6 +131,8 @@ def build(root: Path, event_name: str, ref: str, sha: str, repository: str, payl
         {"uri": "sigil://pacadex/workflows", "type": "WorkflowRAGInspection"},
         {"uri": "sigil://pacadex/policies/global", "type": "GlobalPolicyType"},
         {"uri": "sigil://pacadex/kokompis", "type": "PluralKokompiSessionTree"},
+        {"uri": "sigil://pacadex/worktree/livecoded", "type": "LivecodedWorkTreePiBISession"},
+        {"uri": "sigil://pacadex/panics", "type": "PacaPanicTypedLedger"},
     ]
     resources.extend(
         {"uri": f"sigil://pacadex/kokompi/{node['actor'].lower()}", "type": "KokompiVirtualSession", "session_id": node["id"]}
@@ -121,10 +140,11 @@ def build(root: Path, event_name: str, ref: str, sha: str, repository: str, payl
     )
     body = {
         "schema_id": SCHEMA_ID,
-        "verdict": "ADMIT" if admitted else "HOLD",
-        "reason": reason,
+        "verdict": verdict,
+        "reason": composed_reason,
         "project": project,
         "session_tree": {"logic": "piBI", "nodes": nodes, "bunches": bunches},
+        "livecoded_worktree": livecoded,
         "rag_inspection": {"source_bound": True, "hidden_learning": False, "findings": findings},
         "mcp": {"self_exposed": True, "effects": ["DESCRIBE", "READ", "VALIDATE", "PLAN"], "resources": resources},
         "release_policy": {
@@ -162,7 +182,15 @@ def main() -> int:
     args.output.mkdir(parents=True, exist_ok=True)
     (args.output / "pacadex.json").write_text(json.dumps(snapshot, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     (args.output / "mcp-resources.json").write_text(json.dumps(snapshot["mcp"], indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    receipt = {"verdict": snapshot["verdict"], "snapshot_digest": snapshot["snapshot_digest"], "commit_sha": args.sha, "safe_replay": True, "repository_mutated": False}
+    receipt = {
+        "verdict": snapshot["verdict"],
+        "snapshot_digest": snapshot["snapshot_digest"],
+        "livecoded_receipt_digest": snapshot["livecoded_worktree"]["receipt_digest"],
+        "panic_count": len(snapshot["livecoded_worktree"]["panics"]),
+        "commit_sha": args.sha,
+        "safe_replay": True,
+        "repository_mutated": False,
+    }
     (args.output / "receipt.json").write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(receipt, sort_keys=True))
     return 0

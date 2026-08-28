@@ -1,0 +1,22 @@
+{
+  "schema_id": "PACA_TASK_LOCALIZED_LOOP_V1",
+  "task_id": "sigilitas-livecoded-worktree-pibi-panics-v1",
+  "actor": "KOKOMPI_LIVECODED_WORKTREE_KEEPER",
+  "move": "LOOP_OF_LOOP",
+  "source_context": "sigil://pacadex/sigil-quarto-actions/session-tree/v1",
+  "target_context": "sigil://pacadex/sigil-quarto-actions/livecoded-worktree/v1",
+  "loop_id": "sigilitas-livecoded-worktree-pibi-panics-loop-1",
+  "parent_loop_id": "sigilitas-pibi-pacadex-loop-0",
+  "depth": 1,
+  "max_depth": 2,
+  "ambient_profile": "ABSTRACT_HIGHER_TYPE",
+  "transversal": "ink_link_kink_twink",
+  "orthogonal_direction_count": 1,
+  "directional_budget": 4,
+  "higher_type_model": true,
+  "resource_type": "LIVECODED_WORKTREE_PIBI_PACA_PANIC_RESOURCE",
+  "omega_witness": "omega:sigilitas:livecoded-worktree:pibi-panics:v1",
+  "pi_fixed": true,
+  "safe_replay": true,
+  "runtime_authority": false
+}

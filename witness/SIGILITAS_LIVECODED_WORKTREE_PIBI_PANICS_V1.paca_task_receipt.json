@@ -1,0 +1,12 @@
+{
+  "receipt_sha256": "28def9bb0e0097b1250cba51d6c93746ef12a81ce6626edb04560f07436c492a",
+  "schema_id": "PACA_TASK_LOCALIZED_LOOP_V1",
+  "task_id": "sigilitas-livecoded-worktree-pibi-panics-v1",
+  "truth_boundary": {
+    "git_mutated_by_task": false,
+    "physical_action_executed": false,
+    "runtime_started": false,
+    "workflow_dispatched": false
+  },
+  "verdict": "ADMIT_REVIEW_CANDIDATE"
+}
