@@ -1,0 +1,87 @@
+schema: KOKOMPI_RESIDENT_LOCAL_SECTION_V1
+version: 1.0.0
+state: RESIDENT_SOURCE_CANDIDATE
+
+repository:
+  full_name: jbermejovega/sigil-quarto-actions
+  repository_id: 1349558017
+  parent: quarto-dev/quarto-actions
+  default_branch: main
+  fork_identity_distinct: true
+
+federation_binding:
+  canonical_root: jbermejovega/sigilbook
+  global_matrix: GLOBAL_CHECKPOINT_KOKO_GITHUB_MATRIX_MIRROR_FEDERATION_V1
+  global_matrix_snapshot: 20260828_v3
+  already_counted_member: true
+  federation_count_change: 0
+  local_section_identity_distinct: true
+
+resident_type:
+  member_id: KOKOMPI_RESIDENT_SIGIL_QUARTO_ACTIONS
+  SystemicTyped: true
+  RelationalTyped: true
+  PrimitiveTyped: true
+  PluralTyped: true
+  QUNOTyped: true
+  WorkflowTyped: true
+  GitHubLocalizedTyped: true
+  QuartoActionTyped: true
+  PACADEXTyped: true
+  ReplayTyped: true
+  protected_pi: PIORNALEGO_ES_CANON
+
+capabilities:
+  local:
+    - inspect_repository_state
+    - validate_quarto_setup_matrix
+    - generate_source_bound_pacadex
+    - expose_mcp_resource_manifest
+    - emit_immutable_run_artifact
+  composition: INTERSECTION
+
+workflow_evidence_parent:
+  head_sha: a7df9204f68a130d7533662bef63d85408dde650
+  test_matrix:
+    run_id: 33175914663
+    conclusion: success
+    jobs_materialized: 15
+    jobs_success: 15
+    zero_step: false
+  pacadex:
+    run_id: 33175914653
+    conclusion: success
+    jobs_materialized: 1
+    jobs_success: 1
+    zero_step: false
+    artifact_digest: sha256:6426f04ba7fcfd6f9f5e1a1b064b7e79485e54bbc7f7afb030853fc416e8e0e7
+
+boundaries:
+  no_cross_repository_write: true
+  no_history_import: true
+  no_identity_transport: true
+  no_authority_transport: true
+  no_capability_union: true
+  github_green_status_is_not_formal_proof: true
+  hosted_execution_is_evidence_not_authority: true
+  publish_effect_requires_separate_gate: true
+
+local_resident_flow:
+  - SOURCE_SECTION
+  - QUNO_LOCALIZE
+  - PYDANTIKA_VALIDATE
+  - WORKFLOW_OBSERVE
+  - PACADEX_PROJECT
+  - MCP_EXPOSE_READ_ONLY
+  - RECEIPT
+  - PACAPDG_TRACE
+  - UAP_GATE
+  - SAFE_REPLAY
+
+truth_boundary:
+  local_manifest_materialized: true
+  resident_runtime_started: false
+  external_provider_io: false
+  cross_repository_runtime: false
+  formal_certified: false
+  runtime_certified: false
