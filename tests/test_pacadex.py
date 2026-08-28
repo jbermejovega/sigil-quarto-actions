@@ -6,6 +6,7 @@ from sigilitas.pacadex import accepted_event, build, sessions, validate_session_
 from sigilitas.livecoded_worktree import PanicVerdict, livecode_worktree, worktree_bearer
 from sigilitas.pr_tree import artifact_type, type_pr_tree
 from sigilitas.repo_federation import virtual_repo_session
+from sigilitas.external_mcp import canonical_mcp_exposure
 
 
 SHA = "a" * 40
@@ -88,6 +89,20 @@ class PacadexTests(unittest.TestCase):
             )
             self.assertEqual(session["federation"]["capability_composition"], "INTERSECTION")
             self.assertFalse(session["cloud_projection"]["physical_cloud_claimed"])
+
+    def test_external_mcp_exposes_every_registered_agent_read_only(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "README.md").write_text("typed\n")
+            tree = type_pr_tree(root)
+            federation = virtual_repo_session("owner/repo", SHA, tree)
+            nodes, _ = sessions()
+            mcp = canonical_mcp_exposure("owner/repo", SHA, nodes, tree, federation)
+            agent_resources = [r for r in mcp["resources"] if r["type"] == "KokompiAgentType"]
+            self.assertEqual(len(agent_resources), len(nodes))
+            self.assertEqual(mcp["operations"], ["DESCRIBE", "READ", "VALIDATE", "PLAN"])
+            self.assertFalse(mcp["repository_law"]["all_github_repositories_materialized"])
+            self.assertFalse(mcp["hyperjarra_jauria"]["members_fused"])
 
 
 if __name__ == "__main__":

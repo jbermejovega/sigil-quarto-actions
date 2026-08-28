@@ -3,7 +3,7 @@
     "paca_federation_task_validator": "PASS",
     "paca_tree_task_validator": "PASS",
     "python_compile": "PASS",
-    "python_unittest": {"passed": 10, "total": 10},
+    "python_unittest": {"passed": 11, "total": 11},
     "registry_json": "PASS"
   },
   "hosted_workflow": "NOT_OBSERVED_FOR_THIS_SOURCE_TREE",
