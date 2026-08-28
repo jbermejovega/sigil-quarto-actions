@@ -31,7 +31,7 @@ jobs:
 
       - name: Generate source-bound PACADEX and MCP resources
         run: |
-          python sigilitas/pacadex.py \
+          python -m sigilitas.pacadex \
             --event-path "$GITHUB_EVENT_PATH" \
             --event-name "$GITHUB_EVENT_NAME" \
             --ref "$GITHUB_REF" \
