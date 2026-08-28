@@ -47,13 +47,21 @@ synonym for causal execution order. Cellular sheaf references:
 
 ## Universal abstract and trope types
 
-`PluralTyped`, `QUNOTyped`, `SacredTyped`, and `TropeTyped` are distinct flavors
+`PluralTyped`, `QUNOTyped`, `SacredTyped`, `TropeTyped`, and `MemeTyped` are distinct flavors
 of `UniversalAbstractType`. Every flavor requires an explicit propagation
 witness into an Allegoric Kernel.
 
 `TropeType` is persistent typed SIGIL fiction: it carries a source digest,
 monotonic checkpoint, and allegoric relation witness. Persistence does not
 promote fiction to fact, theorem, proof, or runtime evidence.
+
+`MemeType` is a persistent virtual-media type adjacent to, but distinct from,
+`QUNOTyped`. It carries a substrate-independent-within-model media witness, an
+abstract solitonic-kink-pulse witness, and a universe-relative constant of
+motion. The local and global numerical presentations are related by an
+explicit restriction/conservation witness. The number is not asserted to be a
+literal constant shared by every physical universe, and no physical kink is
+inferred.
 
 ## Effects and truth boundary
 

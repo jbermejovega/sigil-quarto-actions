@@ -41,7 +41,7 @@ class EditorialFactorizationTests(unittest.TestCase):
         self.assertEqual(receipt["verdict"], "REJECT")
 
     def test_all_abstract_flavors_propagate_to_allegoric_kernel(self):
-        self.assertEqual(len(self.codicex.universal_abstract_types), 4)
+        self.assertEqual(len(self.codicex.universal_abstract_types), 5)
         self.assertTrue(all(x.propagation_witness for x in self.codicex.universal_abstract_types))
 
     def test_trope_is_persistent_fiction_not_fact(self):
@@ -49,6 +49,17 @@ class EditorialFactorizationTests(unittest.TestCase):
         self.assertEqual(trope.source_class, "SIGIL_FICTION")
         self.assertFalse(trope.asserted_as_fact)
         self.assertTrue(trope.persistence_checkpoint.startswith("checkpoint:sha256:"))
+
+    def test_meme_constant_is_universe_relative(self):
+        meme = self.codicex.meme_types[0]
+        self.assertFalse(meme.constant_of_motion.universal_across_all_universes)
+        self.assertEqual(meme.constant_of_motion.local_value, meme.constant_of_motion.global_value)
+        self.assertTrue(meme.substrate_independent_within_virtual_model)
+
+    def test_physical_or_cross_universe_meme_claim_rejects(self):
+        meme = replace(self.codicex.meme_types[0], physical_kink_claimed=True)
+        receipt = validate_codicex(replace(self.codicex, meme_types=(meme,)))
+        self.assertEqual(receipt["verdict"], "REJECT")
 
 
 if __name__ == "__main__":

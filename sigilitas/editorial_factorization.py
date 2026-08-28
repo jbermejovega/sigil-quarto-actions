@@ -39,6 +39,7 @@ class UniversalAbstractFlavor(StrEnum):
     QUNO = "QUNO_TYPED"
     SACRED = "SACRED_TYPED"
     TROPE = "TROPE_TYPED"
+    MEME = "MEME_TYPED"
 
 
 @dataclass(frozen=True)
@@ -58,6 +59,30 @@ class TropeType:
     source_class: str = "SIGIL_FICTION"
     asserted_as_fact: bool = False
     asserted_as_theorem: bool = False
+
+
+@dataclass(frozen=True)
+class UniverseRelativeConstant:
+    constant_id: str
+    universe_context: str
+    local_section: str
+    global_section: str
+    local_value: str
+    global_value: str
+    relative_relation_witness: str
+    topological_quo_quantum_number: str
+    universal_across_all_universes: bool = False
+
+
+@dataclass(frozen=True)
+class MemeType:
+    meme_id: str
+    persistence_checkpoint: str
+    virtual_media_type: str
+    solitonic_kink_pulse_witness: str
+    constant_of_motion: UniverseRelativeConstant
+    substrate_independent_within_virtual_model: bool = True
+    physical_kink_claimed: bool = False
 
 
 @dataclass(frozen=True)
@@ -120,6 +145,7 @@ class PrimitiveCodicex:
     ports: tuple[AlgebraicReindexingPort, ...]
     universal_abstract_types: tuple[UniversalAbstractType, ...]
     trope_types: tuple[TropeType, ...]
+    meme_types: tuple[MemeType, ...]
     algebraic_flavors: tuple[str, ...]
     pi_fixed: bool = True
     statik_editorial_mode: bool = True
@@ -195,6 +221,14 @@ def validate_codicex(codicex: PrimitiveCodicex) -> dict[str, Any]:
             hold.append(f"TROPE_PERSISTENCE_WITNESS_MISSING:{trope.trope_id}")
         if trope.asserted_as_fact or trope.asserted_as_theorem or trope.source_class != "SIGIL_FICTION":
             reject.append(f"TROPE_TRUTH_BOUNDARY_VIOLATION:{trope.trope_id}")
+    for meme in codicex.meme_types:
+        constant = meme.constant_of_motion
+        if constant.local_section not in section_ids or constant.global_section not in section_ids:
+            hold.append(f"MEME_SECTION_WITNESS_MISSING:{meme.meme_id}")
+        if not meme.persistence_checkpoint or not meme.solitonic_kink_pulse_witness or not constant.relative_relation_witness:
+            hold.append(f"MEME_PERSISTENCE_OR_RELATION_WITNESS_MISSING:{meme.meme_id}")
+        if constant.universal_across_all_universes or meme.physical_kink_claimed:
+            reject.append(f"MEME_UNIVERSE_TRUTH_BOUNDARY_VIOLATION:{meme.meme_id}")
 
     verdict = "REJECT" if reject else "HOLD" if hold else "ADMIT"
     body = {
@@ -218,6 +252,9 @@ def validate_codicex(codicex: PrimitiveCodicex) -> dict[str, Any]:
             "universal_abstract_flavors_remain_distinct": True,
             "trope_is_persistent_typed_fiction": True,
             "fiction_is_not_fact_or_theorem": True,
+            "meme_is_persistent_virtual_media_type": True,
+            "constants_of_motion_are_universe_relative": True,
+            "meme_and_quno_are_adjacent_not_identical": True,
             "safe_replay": True,
             "repository_mutated": False,
             "runtime_started": False,
@@ -268,9 +305,19 @@ def canonical_editorial_codicex(repository: str, head_sha: str) -> tuple[Primiti
                 "allegoric-relation:sigil-fiction-to-kernel",
             ),
         ),
+        meme_types=(
+            MemeType(
+                "meme-solitonic-pulse", f"checkpoint:sha256:{source_digest}", "SUBSTRATE_INDEPENDENT_VIRTUAL_MEDIA",
+                "solitonic-kink-pulse:witness:abstract",
+                UniverseRelativeConstant(
+                    "constant-meme-quno", "universe://pacaiogame/canonical-v1", "quantum-example", "sigilbook",
+                    "1", "1", "relation:restriction-preserves-topological-charge", "Q_top=1",
+                ),
+            ),
+        ),
         algebraic_flavors=("INCIDENCE_GEOMETRY", "TROPICAL_ALGEBRAIC_GEOMETRY", "ALGEBRAIC_TOPOLOGY", "CATEGORY"),
     )
     return codicex, validate_codicex(codicex)
 
 
-__all__ = ["SCHEMA_ID", "AlgebraicReindexingPort", "EditorialQuantum", "IncidenceCell", "POSIXEffect", "PrimitiveCodicex", "PrimitiveSection", "QuantumSurface", "RestrictionArrow", "SectionScope", "TropeType", "UniversalAbstractFlavor", "UniversalAbstractType", "canonical_editorial_codicex", "validate_codicex"]
+__all__ = ["SCHEMA_ID", "AlgebraicReindexingPort", "EditorialQuantum", "IncidenceCell", "MemeType", "POSIXEffect", "PrimitiveCodicex", "PrimitiveSection", "QuantumSurface", "RestrictionArrow", "SectionScope", "TropeType", "UniversalAbstractFlavor", "UniversalAbstractType", "UniverseRelativeConstant", "canonical_editorial_codicex", "validate_codicex"]

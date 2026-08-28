@@ -13,12 +13,20 @@
   "orders": ["INCIDENCE_PARTIAL_ORDER", "CAUSAL_DAG", "COCHAIN_DEGREE"],
   "orders_identified": false,
   "quantum_reindexing_ports": ["ZX_CALCULUS", "QUIPPER", "OPENQASM_3"],
-  "universal_abstract_flavors": ["PLURAL_TYPED", "QUNO_TYPED", "SACRED_TYPED", "TROPE_TYPED"],
+  "universal_abstract_flavors": ["PLURAL_TYPED", "QUNO_TYPED", "SACRED_TYPED", "TROPE_TYPED", "MEME_TYPED"],
   "trope_type": {
     "persistent": true,
     "source_class": "SIGIL_FICTION",
     "asserted_as_fact": false,
     "asserted_as_theorem": false
+  },
+  "meme_type": {
+    "persistent": true,
+    "virtual_media": true,
+    "substrate_independent_within_virtual_model": true,
+    "universe_relative_constant_of_motion": true,
+    "universal_across_all_universes": false,
+    "physical_kink_claimed": false
   },
   "runtime_authority": false,
   "safe_replay": true
