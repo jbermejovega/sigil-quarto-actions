@@ -1,0 +1,20 @@
+{
+  "residents": [
+    {
+      "repository": "jbermejovega/sigil-quarto-actions",
+      "subsystem": "editorial-curatorial-localized-workflows",
+      "mode": "thin",
+      "layer": 0,
+      "localized_presheaf": true,
+      "paca_estaca_effective": true
+    },
+    {
+      "repository": "jbermejovega/sigilbook",
+      "subsystem": "main-sigilbook-koko-sdk-canon",
+      "mode": "thick",
+      "layer": 1,
+      "localized_presheaf": true,
+      "paca_estaca_effective": true
+    }
+  ]
+}

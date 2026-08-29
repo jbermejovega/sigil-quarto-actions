@@ -1,0 +1,106 @@
+{
+  "schema_id": "SIGIL_QUARTO_ACTIONS_VIRTUAL_RPM_STANDALONE_V1",
+  "schema_version": "1.0.0",
+  "resident": {
+    "repository": "jbermejovega/sigil-quarto-actions",
+    "subsystem": "editorial-curatorial-localized-workflows",
+    "mode": "thin",
+    "paca_estaca": "estaca.editorial.quarto.actions",
+    "localized_allegoric_presheaf": true
+  },
+  "host_windows_chocolatey": {
+    "manager": "choco",
+    "install_authority": "human_local_admin",
+    "packages": [
+      {
+        "name": "git",
+        "role": "local source control"
+      },
+      {
+        "name": "python314",
+        "role": "stable Python host runtime"
+      },
+      {
+        "name": "vscode.install",
+        "role": "VS Code workbench"
+      },
+      {
+        "name": "docker-desktop",
+        "role": "local container runtime for devcontainer"
+      },
+      {
+        "name": "quarto",
+        "role": "host Quarto renderer"
+      },
+      {
+        "name": "pandoc",
+        "role": "host Pandoc converter"
+      },
+      {
+        "name": "gh",
+        "role": "optional virtual GitHub CLI projection"
+      }
+    ]
+  },
+  "container": {
+    "dockerfile": ".devcontainer/Dockerfile",
+    "image": "sigil-quarto-actions:standalone",
+    "base": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+    "quarto_version": "1.10.18",
+    "apt_packages": [
+      "ca-certificates",
+      "curl",
+      "git",
+      "jq",
+      "pandoc",
+      "python3",
+      "python3-pip",
+      "python3-venv"
+    ]
+  },
+  "sigilbook_binding": {
+    "path": "../sigilbook",
+    "container_mount": "/workspace/sigilbook",
+    "read_only": true,
+    "koko_sdk_required": true,
+    "kli_qli_cli_required": true
+  },
+  "carriers": [
+    {
+      "name": "clear-workflows",
+      "schema_id": "SIGIL_QUARTO_ACTIONS_EDITORIAL_WORKFLOW_CLEARANCE_V1",
+      "authority": "source_witness_only"
+    },
+    {
+      "name": "play-knext-round",
+      "schema_id": "SIGIL_QUARTO_ACTIONS_PYDANTIKA_APRENDE_PACAIOGAME_KNEXT_ROUND_V1",
+      "authority": "source_witness_only",
+      "requires": [
+        "PACAIOGAME_TYPED_ACTION_WORKFLOW_RUNTIME_V1",
+        "KNEXT_PACAIOGAME_IR_M1",
+        "SIGILITAS_KOKO_SDK_KONNEKTIA_VIRTUAL_KLI_PACA_HABILIDAD_V1"
+      ]
+    },
+    {
+      "name": "canonicalize-dokumenta",
+      "schema_id": "SIGIL_QUARTO_ACTIONS_PACA_DOKUMENTA_PROJECT_MANAGEMENT_V1",
+      "authority": "source_witness_only",
+      "requires": [
+        "SIGILITAS_PACA_DOKUMENTA_VERSION_CONTROL_HYPERDAG_V6",
+        "PACA_PANDOC_AST_PROJECT",
+        "PACA_QUARTO_PROJECT",
+        "SIGIL_QUARTO_ACTIONS_EDITORIAL_WORKFLOW_CLEARANCE_V1"
+      ]
+    }
+  ],
+  "truth_boundary": {
+    "virtual_rpm_installed_by_manifest": false,
+    "chocolatey_executed_by_manifest": false,
+    "docker_started_by_manifest": false,
+    "github_api_called_by_manifest": false,
+    "repository_mutated_by_manifest": false,
+    "workflow_dispatched_by_manifest": false,
+    "sigil_kli_qli_cli_owns_typed_plan": true,
+    "codex_github_connector_owns_authorized_repository_io": true
+  }
+}

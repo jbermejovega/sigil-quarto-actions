@@ -1,0 +1,59 @@
+name: 'Play Sigil PACAIOGAME KNEXT round'
+author: 'Jara Juana Bermejo Vega'
+description: 'Compose Pydantika Aprende, deploy-plan, merge-plan and PACAIOGAME KNEXT play as a local source witness'
+inputs:
+  sigilbook-path:
+    description: 'Local path to an already-materialized main sigilbook checkout'
+    required: false
+    default: '.sigilbook'
+  resident-path:
+    description: 'Local path to the resident repository'
+    required: false
+    default: '.'
+  clearance-witness:
+    description: 'Path to a clear-workflows witness'
+    required: false
+    default: 'sigil-clearance-witness.json'
+  witness-output:
+    description: 'Path to write the KNEXT round witness JSON'
+    required: false
+    default: 'sigil-knext-round-witness.json'
+  round-id:
+    description: 'Stable round identifier'
+    required: false
+    default: 'knext.pacaiogame.round.local'
+  player:
+    description: 'Typed local player identifier'
+    required: false
+    default: 'codex-local-player'
+  require-clearance:
+    description: 'Require the clear-workflows witness to be admitted'
+    required: false
+    default: 'true'
+  fail-on-hold:
+    description: 'Return a failing exit code when the round witness verdict is HOLD'
+    required: false
+    default: 'true'
+outputs:
+  verdict:
+    description: 'Round verdict: ADMIT_SOURCE_PLAN, HOLD, or REJECT'
+    value: ${{ steps.play.outputs.verdict }}
+  witness-path:
+    description: 'Path to the emitted KNEXT round witness JSON'
+    value: ${{ steps.play.outputs.witness-path }}
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Play bounded KNEXT source round'
+      id: play
+      shell: bash
+      run: |
+        python "$GITHUB_ACTION_PATH/sigil_knext_round.py" \
+          --sigilbook-path "${{ inputs.sigilbook-path }}" \
+          --resident-path "${{ inputs.resident-path }}" \
+          --clearance-witness "${{ inputs.clearance-witness }}" \
+          --witness-output "${{ inputs.witness-output }}" \
+          --round-id "${{ inputs.round-id }}" \
+          --player "${{ inputs.player }}" \
+          --require-clearance "${{ inputs.require-clearance }}" \
+          --fail-on-hold "${{ inputs.fail-on-hold }}"

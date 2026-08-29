@@ -1,3 +1,6 @@
 
 # dev tooling
 .private-journal/
+.sigil-test-deps/
+__pycache__/
+sigil-*-witness*.json

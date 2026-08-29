@@ -1,0 +1,37 @@
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/**"
+      - "editorial/**"
+      - "curation/**"
+
+name: Sigil Editorial Curation Clearance
+
+permissions:
+  contents: read
+
+jobs:
+  clear:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out resident repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Assert main sigilbook was materialized by Sigil KLI/QLI
+        run: test -d .sigilbook
+
+      - name: Clear localized workflow layer
+        uses: jbermejovega/sigil-quarto-actions/clear-workflows@v2
+        with:
+          sigilbook-path: .sigilbook
+          resident-path: .
+          workflow-layer: .github/workflows
+          resident-manifest: examples/synthgothhub-residents.example.json
+          witness-output: sigil-clearance-witness.json
+          subsystem-mode: thin
+          max-fanin: 3
+          max-fanout: 3
+          max-layer: 3

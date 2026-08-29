@@ -1,0 +1,29 @@
+{
+  "name": "sigil-quarto-actions standalone",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "..",
+    "args": {
+      "QUARTO_VERSION": "1.10.18"
+    }
+  },
+  "workspaceFolder": "/workspace/sigil-quarto-actions",
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace/sigil-quarto-actions,type=bind,consistency=cached",
+    "source=${localWorkspaceFolder}/../sigilbook,target=/workspace/sigilbook,type=bind,readonly,consistency=cached"
+  ],
+  "containerEnv": {
+    "SIGIL_SYSTEM_MODE": "thin",
+    "SIGILBOOK_PATH": "/workspace/sigilbook"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-azuretools.vscode-docker",
+        "quarto.quarto"
+      ]
+    }
+  },
+  "postCreateCommand": "python3 clear-workflows/sigil_workflow_clear.py --sigilbook-path /workspace/sigilbook --resident-path /workspace/sigil-quarto-actions --workflow-layer examples --witness-output /tmp/sigil-quarto-actions-clearance.json --fail-on-hold false"
+}

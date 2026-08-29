@@ -1,0 +1,69 @@
+name: 'Canonicalize Sigil PACA Dokumenta project management'
+author: 'Jara Juana Bermejo Vega'
+description: 'Bind PACA Dokumenta V6 to a bounded PACA Pandoc / PACA Quarto project-management source plan'
+inputs:
+  sigilbook-path:
+    description: 'Local path to an already-materialized main sigilbook checkout'
+    required: false
+    default: '.sigilbook'
+  resident-path:
+    description: 'Local path to the resident repository'
+    required: false
+    default: '.'
+  project-path:
+    description: 'Resident project path to inventory for Dokumenta project management'
+    required: false
+    default: '.'
+  clearance-witness:
+    description: 'Path to a clear-workflows witness'
+    required: false
+    default: 'sigil-clearance-witness.json'
+  witness-output:
+    description: 'Path to write the Dokumenta project witness JSON'
+    required: false
+    default: 'sigil-dokumenta-project-witness.json'
+  project-id:
+    description: 'Stable PACA Dokumenta project identifier'
+    required: false
+    default: 'paca.dokumenta.project.local'
+  project-name:
+    description: 'Human project name for the source-plan witness'
+    required: false
+    default: 'PACA Dokumenta Project Management'
+  owner:
+    description: 'Typed local owner identifier'
+    required: false
+    default: 'codex-local-owner'
+  require-clearance:
+    description: 'Require the clear-workflows witness to be admitted'
+    required: false
+    default: 'true'
+  fail-on-hold:
+    description: 'Return a failing exit code when the Dokumenta witness verdict is HOLD'
+    required: false
+    default: 'true'
+outputs:
+  verdict:
+    description: 'Dokumenta project verdict: ADMIT_SOURCE_PLAN, HOLD, or REJECT'
+    value: ${{ steps.canonicalize.outputs.verdict }}
+  witness-path:
+    description: 'Path to the emitted Dokumenta project witness JSON'
+    value: ${{ steps.canonicalize.outputs.witness-path }}
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Canonicalize Dokumenta project management source plan'
+      id: canonicalize
+      shell: bash
+      run: |
+        python "$GITHUB_ACTION_PATH/sigil_dokumenta_project.py" \
+          --sigilbook-path "${{ inputs.sigilbook-path }}" \
+          --resident-path "${{ inputs.resident-path }}" \
+          --project-path "${{ inputs.project-path }}" \
+          --clearance-witness "${{ inputs.clearance-witness }}" \
+          --witness-output "${{ inputs.witness-output }}" \
+          --project-id "${{ inputs.project-id }}" \
+          --project-name "${{ inputs.project-name }}" \
+          --owner "${{ inputs.owner }}" \
+          --require-clearance "${{ inputs.require-clearance }}" \
+          --fail-on-hold "${{ inputs.fail-on-hold }}"

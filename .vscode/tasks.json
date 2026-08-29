@@ -1,0 +1,159 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Sigil: clear workflows locally",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "clear-workflows/sigil_workflow_clear.py",
+        "--sigilbook-path",
+        "../sigilbook",
+        "--resident-path",
+        ".",
+        "--workflow-layer",
+        "examples",
+        "--witness-output",
+        "${workspaceFolder}/sigil-clearance-witness.local.json",
+        "--fail-on-hold",
+        "false"
+      ],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Sigil: build standalone container",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "build",
+        "-t",
+        "sigil-quarto-actions:standalone",
+        "-f",
+        ".devcontainer/Dockerfile",
+        "."
+      ],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Sigil: clear workflows in container",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-v",
+        "${workspaceFolder}:/workspace/sigil-quarto-actions",
+        "-v",
+        "${workspaceFolder}/../sigilbook:/workspace/sigilbook:ro",
+        "-w",
+        "/workspace/sigil-quarto-actions",
+        "sigil-quarto-actions:standalone",
+        "python3",
+        "clear-workflows/sigil_workflow_clear.py",
+        "--sigilbook-path",
+        "/workspace/sigilbook",
+        "--resident-path",
+        "/workspace/sigil-quarto-actions",
+        "--workflow-layer",
+        "examples",
+        "--witness-output",
+        "/workspace/sigil-quarto-actions/sigil-clearance-witness.container.json",
+        "--fail-on-hold",
+        "false"
+      ],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Sigil: play KNEXT round locally",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "play-knext-round/sigil_knext_round.py",
+        "--sigilbook-path",
+        "../sigilbook",
+        "--resident-path",
+        ".",
+        "--clearance-witness",
+        "${workspaceFolder}/sigil-clearance-witness.local.json",
+        "--witness-output",
+        "${workspaceFolder}/sigil-knext-round-witness.local.json",
+        "--round-id",
+        "knext.pacaiogame.editorial.local",
+        "--fail-on-hold",
+        "false"
+      ],
+      "dependsOn": [
+        "Sigil: clear workflows locally"
+      ],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Sigil: canonicalize Dokumenta project locally",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "canonicalize-dokumenta/sigil_dokumenta_project.py",
+        "--sigilbook-path",
+        "../sigilbook",
+        "--resident-path",
+        ".",
+        "--project-path",
+        ".",
+        "--clearance-witness",
+        "${workspaceFolder}/sigil-clearance-witness.local.json",
+        "--witness-output",
+        "${workspaceFolder}/sigil-dokumenta-project-witness.local.json",
+        "--project-id",
+        "paca.dokumenta.sigil-quarto-actions.local",
+        "--fail-on-hold",
+        "false"
+      ],
+      "dependsOn": [
+        "Sigil: clear workflows locally"
+      ],
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "Sigil: canonicalize Dokumenta project in container",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-v",
+        "${workspaceFolder}:/workspace/sigil-quarto-actions",
+        "-v",
+        "${workspaceFolder}/../sigilbook:/workspace/sigilbook:ro",
+        "-w",
+        "/workspace/sigil-quarto-actions",
+        "sigil-quarto-actions:standalone",
+        "python3",
+        "canonicalize-dokumenta/sigil_dokumenta_project.py",
+        "--sigilbook-path",
+        "/workspace/sigilbook",
+        "--resident-path",
+        "/workspace/sigil-quarto-actions",
+        "--project-path",
+        ".",
+        "--clearance-witness",
+        "/workspace/sigil-quarto-actions/sigil-clearance-witness.container.json",
+        "--witness-output",
+        "/workspace/sigil-quarto-actions/sigil-dokumenta-project-witness.container.json",
+        "--project-id",
+        "paca.dokumenta.sigil-quarto-actions.container",
+        "--fail-on-hold",
+        "false"
+      ],
+      "dependsOn": [
+        "Sigil: clear workflows in container"
+      ],
+      "group": "test",
+      "problemMatcher": []
+    }
+  ]
+}

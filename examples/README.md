@@ -8,6 +8,21 @@
 * [Publishing a single format, publishing without rendering](./example-06-no-render.md)
 * [Publishing a single format](./example-07-publish-single-format.md)
 * [Publishing to other services](./example-08-publish-to-others-services.md)
+* [Sigil editorial curation clearance](./sigil-editorial-curation-clearance.yml)
+* [Sigil PACAIOGAME KNEXT round](./sigil-pacaiogame-knext-round.yml)
+* [Sigil PACA Dokumenta project management](./sigil-paca-dokumenta-project-management.yml)
+
+## Sigil examples
+
+The Sigil example keeps main `sigilbook` materialization outside GitHub API
+actions. The local KLI/QLI/CLI or Codex GitHub connector layer must provide the
+`sigilbook` source path before `clear-workflows` validates the resident
+workflow layer.
+The KNEXT round example then consumes that clearance witness to emit a
+Pydantika Aprende / deploy-plan / merge-plan / PACAIOGAME source-play receipt.
+The Dokumenta example consumes the same clearance witness and binds main
+`sigilbook` PACA Dokumenta V6 to a bounded PACA Pandoc / PACA Quarto
+project-management witness without rendering documents.
 
 ## Repositories using Quarto actions
 

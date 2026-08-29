@@ -1,0 +1,79 @@
+name: 'Clear Sigil editorial workflows'
+author: 'Jara Juana Bermejo Vega'
+description: 'Validate localized editorial workflow layers against local sigilbook and Koko SDK anchors without GitHub API authority'
+inputs:
+  sigilbook-path:
+    description: 'Local path to an already-materialized main sigilbook checkout'
+    required: false
+    default: '.'
+  resident-path:
+    description: 'Local path to the resident repository being cleared'
+    required: false
+    default: '.'
+  workflow-layer:
+    description: 'Workflow directory relative to resident-path'
+    required: false
+    default: '.github/workflows'
+  resident-manifest:
+    description: 'Optional JSON manifest of SynthGothHub residents'
+    required: false
+    default: ''
+  witness-output:
+    description: 'Path to write the clearance witness JSON'
+    required: false
+    default: 'sigil-clearance-witness.json'
+  subsystem-mode:
+    description: 'Subsystem mode: thin, thick, or auto'
+    required: false
+    default: 'thin'
+  max-fanin:
+    description: 'Maximum workflow job fan-in, bounded to 0..3'
+    required: false
+    default: '3'
+  max-fanout:
+    description: 'Maximum workflow job fan-out, bounded to 0..3'
+    required: false
+    default: '3'
+  max-layer:
+    description: 'Maximum workflow job contextual layer, bounded to 0..3'
+    required: false
+    default: '3'
+  require-koko-sdk:
+    description: 'Require main sigilbook Koko SDK and KLI/QLI anchors'
+    required: false
+    default: 'true'
+  require-localized-layer:
+    description: 'Require at least one workflow YAML file in workflow-layer'
+    required: false
+    default: 'true'
+  fail-on-hold:
+    description: 'Return a failing exit code when the witness verdict is HOLD'
+    required: false
+    default: 'true'
+outputs:
+  verdict:
+    description: 'Clearance verdict: ADMIT_SOURCE_PLAN, HOLD, or REJECT'
+    value: ${{ steps.clear.outputs.verdict }}
+  witness-path:
+    description: 'Path to the emitted clearance witness JSON'
+    value: ${{ steps.clear.outputs.witness-path }}
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Clear localized editorial workflows'
+      id: clear
+      shell: bash
+      run: |
+        python "$GITHUB_ACTION_PATH/sigil_workflow_clear.py" \
+          --sigilbook-path "${{ inputs.sigilbook-path }}" \
+          --resident-path "${{ inputs.resident-path }}" \
+          --workflow-layer "${{ inputs.workflow-layer }}" \
+          --resident-manifest "${{ inputs.resident-manifest }}" \
+          --witness-output "${{ inputs.witness-output }}" \
+          --subsystem-mode "${{ inputs.subsystem-mode }}" \
+          --max-fanin "${{ inputs.max-fanin }}" \
+          --max-fanout "${{ inputs.max-fanout }}" \
+          --max-layer "${{ inputs.max-layer }}" \
+          --require-koko-sdk "${{ inputs.require-koko-sdk }}" \
+          --require-localized-layer "${{ inputs.require-localized-layer }}" \
+          --fail-on-hold "${{ inputs.fail-on-hold }}"

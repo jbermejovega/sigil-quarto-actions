@@ -15,6 +15,22 @@ This action will:
 
 We recommend using a Linux or MacOS runner if possible, especially if TinyTeX is needed.
 
+## Sigil standalone Windows setup
+
+For local VS Code development on Windows, this repository also includes a
+Chocolatey bootstrap and devcontainer path that does not use the GitHub API:
+
+```powershell
+.\setup\install-sigil-quarto-standalone-windows.ps1 -InstallHostPackages
+.\setup\install-sigil-quarto-standalone-windows.ps1 -InstallDockerDesktop
+.\setup\install-sigil-quarto-standalone-windows.ps1 -BuildContainer
+```
+
+VS Code tasks are provided for local workflow clearance, PACAIOGAME KNEXT
+source rounds, and PACA Dokumenta project-management canonicalization.
+
+See [VS_CODE_STANDALONE_SIGIL_SYSTEM.md](./VS_CODE_STANDALONE_SIGIL_SYSTEM.md).
+
 ### Inputs available
 
 * `version` - _optional_. If provided, the specific quarto version will be installed. Ex: `version: 1.4.515`
